@@ -18,11 +18,11 @@ and your preferred bootstrap3 package, eg.
 
 If Iron:Router is not used, the system defaults to Template.dynamic via the Session variable _template_.
 
-Include the Bootstrap3Boilerplate template in your body tag
+Include the Bootstrap3boilerplate template in your body tag
 
 <code>
     <body>
-    {{>Bootstrap3Boilerplate}}
+    {{>Bootstrap3boilerplate}}
     </body>
 </code>
 
