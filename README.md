@@ -52,28 +52,28 @@ Router.config({
 The package exports a global object called <code>Bootstrap3boilerplate</code> which is being used to control the different aspects of the template.
 
 The following reactive vars can be set
-*Bootstrap3boilerplate.ProjectName.set('String in top left')*
-*Bootstrap3boilerplate.fluid.set(Boolean)* container layout fluid or not
-*Bootstrap3boilerplate.Navbar.type.set('navbar-default|navbar-static-top|navbar-fixed-top)* set the template Navbar style
-*Bootstrap3boilerplate.Navbar.inverse.set(Boolean)* Set Navbar inverse
+- <code>Bootstrap3boilerplate.ProjectName.set(String)</code> set string  in top left
+- <code>Bootstrap3boilerplate.fluid.set(Boolean)</code> container layout fluid or not
+- <code>Bootstrap3boilerplate.Navbar.type.set(Style)</code> set the template Navbar style to on of _navbar-default|navbar-static-top|navbar-fixed-top_
+- <code>Bootstrap3boilerplate.Navbar.inverse.set(Boolean)</code> Set Navbar inverse
 
 and one static string defining the Not Found template
-*Bootstrap3boilerplate.notFound: 'Bootstrap3boilerplateNotFound'*
+- <code>Bootstrap3boilerplate.notFound = 'Template'</code> set the notFound template, default Bootstrap3boilerplateNotFound
 
 The following are methods that can be overridden
-*Bootstrap3boilerplate.Navbar.left = function()* return array of menu objects
-*Bootstrap3boilerplate.Navbar.right = function()* return array of menu objects
+- <code>Bootstrap3boilerplate.Navbar.left = function()</code> return array of menu objects
+- <code>Bootstrap3boilerplate.Navbar.right = function()</code> return array of menu objects
 
 where a menu object is contains href and text, and optionally a sub-array called dropdown. Three special menu objects are divider:true, header: 'Text' and showLoginButtons:true which will render {{>loginButtons}}
 
 The Boilerplate handles which menu item is active based on the current URL/slug, unless overwritten by the optional active:true 
 
 Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
-*Bootstrap3boilerplate.Navbar.events(MeteorEventObject)* Define the event callbacs for the Navbar
-*Bootstrap3boilerplate.Navbar.defaultEvents()* setup default events for the Navbar 
-*Bootstrap3boilerplate.init(customEvents)* initialize the boilerplate and the the Navbar events. If omitted init will call the defaultEvents() method
-*Bootstrap3boilerplate.alert(type,text,dismiss)* show bootstrap alert of _type_
-*Bootstrap3boilerplate.removeAlert(id|'all'|'clear')* remove a specific or all alerts
+- <code>Bootstrap3boilerplate.Navbar.events(MeteorEventDefinition)</code> Define the event callbacs for the Navbar
+- <code>Bootstrap3boilerplate.Navbar.defaultEvents()</code> setup default events for the Navbar 
+- <code>Bootstrap3boilerplate.init(customEvents)</code> initialize the boilerplate and the the Navbar events. If omitted init will call the defaultEvents() method
+- <code>Bootstrap3boilerplate.alert(type,text,dismiss)</code> show bootstrap alert of _type_
+- <code>Bootstrap3boilerplate.removeAlert(id|'all'|'clear')</code> remove a specific or all alerts
 
 #### Menu Object Example
 <code>
