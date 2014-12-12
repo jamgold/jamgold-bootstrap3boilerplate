@@ -77,7 +77,6 @@ Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
 
 #### Menu Object Example
 <pre>
-``
 {href:'#hello',text:'Home'},
 {href:'#about',text:'About'},
 {href:'#contact',text:'Contact'},
@@ -89,5 +88,4 @@ Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
     {href:"#sep1", text: 'Separated link'},
     {href:"#sep2", text: 'One more separated link'}
 ]}
-``
 </pre>
