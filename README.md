@@ -76,7 +76,7 @@ Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
 - <code>Bootstrap3boilerplate.removeAlert(id|'all'|'clear')</code> remove a specific or all alerts
 
 #### Menu Object Example
-<code>
+``
 {href:'#hello',text:'Home'},
 {href:'#about',text:'About'},
 {href:'#contact',text:'Contact'},
@@ -88,4 +88,4 @@ Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
     {href:"#sep1", text: 'Separated link'},
     {href:"#sep2", text: 'One more separated link'}
 ]}
-</code>
+``
