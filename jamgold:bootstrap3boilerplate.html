@@ -64,6 +64,20 @@
 	{{>Bootstrap3boilerplateNavbar}}
 
 	<div class="{{fluid}}">
+		{{#if alert}}
+			{{#each alert}}
+			<div class="alert alert-{{type}}" role="alert">
+			{{#if dismiss}}
+			<button alertid="{{alertid}}" type="button" class="close" xdata-dismiss="alert">
+				<span alertid="{{alertid}}" aria-hidden="true">&times;</span>
+				<span alertid="{{alertid}}" class="sr-only">Close</span>
+			</button>
+			{{/if}}
+			{{{text}}}
+			</div>
+			{{/each}}
+		{{/if}}
+
 		<div class="starter-template">
 		{{#if iron_router}}
 			{{>yield}}

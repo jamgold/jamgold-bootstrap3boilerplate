@@ -46,3 +46,46 @@ Router.config({
     layoutTemplate: 'Bootstrap3Boilerplate'
 });
 </code>
+
+## Configuration
+
+The package exports a global object called <code>Bootstrap3boilerplate</code> which is being used to control the different aspects of the template.
+
+The following reactive vars can be set
+*Bootstrap3boilerplate.ProjectName.set('String in top left')*
+*Bootstrap3boilerplate.fluid.set(Boolean)* container layout fluid or not
+*Bootstrap3boilerplate.Navbar.type.set('navbar-default|navbar-static-top|navbar-fixed-top)* set the template Navbar style
+*Bootstrap3boilerplate.Navbar.inverse.set(Boolean)* Set Navbar inverse
+
+and one static string defining the Not Found template
+*Bootstrap3boilerplate.notFound: 'Bootstrap3boilerplateNotFound'*
+
+The following are methods that can be overridden
+*Bootstrap3boilerplate.Navbar.left = function()* return array of menu objects
+*Bootstrap3boilerplate.Navbar.right = function()* return array of menu objects
+
+where a menu object is contains href and text, and optionally a sub-array called dropdown. Three special menu objects are divider:true, header: 'Text' and showLoginButtons:true which will render {{>loginButtons}}
+
+The Boilerplate handles which menu item is active based on the current URL/slug, unless overwritten by the optional active:true 
+
+Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
+*Bootstrap3boilerplate.Navbar.events(MeteorEventObject)* Define the event callbacs for the Navbar
+*Bootstrap3boilerplate.Navbar.defaultEvents()* setup default events for the Navbar 
+*Bootstrap3boilerplate.init(customEvents)* initialize the boilerplate and the the Navbar events. If omitted init will call the defaultEvents() method
+*Bootstrap3boilerplate.alert(type,text,dismiss)* show bootstrap alert of _type_
+*Bootstrap3boilerplate.removeAlert(id|'all'|'clear')* remove a specific or all alerts
+
+#### Menu Object Example
+<code>
+{href:'#hello',text:'Home'},
+{href:'#about',text:'About'},
+{href:'#contact',text:'Contact'},
+{text:'Dropdown',dropdown:[
+    {href:'#action1',text: 'Action'},
+    {href:'#action2',text: 'Another Action'},
+    {divider: true},
+    {header: 'Some More'},
+    {href:"#sep1", text: 'Separated link'},
+    {href:"#sep2", text: 'One more separated link'}
+]}
+</code>

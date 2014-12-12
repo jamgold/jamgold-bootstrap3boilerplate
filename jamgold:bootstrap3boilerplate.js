@@ -4,7 +4,6 @@
 Bootstrap3boilerplate = {
 	ProjectName: new ReactiveVar('Project Name'),
 	fluid: new ReactiveVar(false),
-	iron_router: false,
 	notFound: 'Bootstrap3boilerplateNotFound',
 	Navbar: {
 		type: new ReactiveVar('navbar-default'),
@@ -44,7 +43,33 @@ Bootstrap3boilerplate = {
 					Bootstrap3boilerplate.setTemplate(e.target.href)
 				}
 			});
+		},
+	},
+	alert: function(type, text, dismiss) {
+		type = _.indexOf(Bootstrap3boilerplate._alertTypes, type)>=0 ? type : 'info';
+		dismiss = dismiss === undefined ? false : dismiss === true;
+		var alerts = Session.get('Bootstrap3boilerplateAlert');
+		if(alerts === undefined) alerts = [];
+		alerts.push({
+			type: type,
+			text: text,
+			dismiss: dismiss,
+			alertid: Meteor.uuid()
+		});
+		Session.set('Bootstrap3boilerplateAlert',alerts);
+	},
+	removeAlert: function(alertid) {
+		var newalerts = [];
+		if(_.indexOf(['all','clear'],alertid) <0)
+		{
+			var alerts = Session.get('Bootstrap3boilerplateAlert');
+			if(alerts === undefined) alerts = [];
+			_.each(alerts,function(alert){
+				if(alert.alertid != alertid)
+					newalerts.push(alert);
+			});
 		}
+		Session.set('Bootstrap3boilerplateAlert',newalerts);
 	},
 	//
 	// function used for Template.dynamic
@@ -57,10 +82,13 @@ Bootstrap3boilerplate = {
 		var t = linkhash.split('#')[1];
 		if(t) Session.set('template', t);
 	},
+	_alertTypes: ['success', 'info', 'warning', 'danger'],
+	_iron_router: false,
 	// have an init function to setup a Tracker for the body class
 	init: function(customEvents){
-		this.iron_router = Package['iron:router'] !== undefined;
-		if(!this.iron_router)
+		Session.setDefault('Bootstrap3boilerplateAlert', []);
+		this._iron_router = Package['iron:router'] !== undefined;
+		if(!this._iron_router)
 			this.setTemplate(document.location.hash);
 		if(customEvents)
 		{
@@ -111,10 +139,20 @@ Template.Bootstrap3boilerplate.helpers({
 		return Bootstrap3boilerplate.fluid.get() ? 'container-fluid' : 'container';
 	},
 	iron_router: function() {
-		return Bootstrap3boilerplate.iron_router;
+		return Bootstrap3boilerplate._iron_router;
 	},
 	template: function() {
 		return Bootstrap3boilerplate.template();
+	},
+	alert: function() {
+		return Session.get('Bootstrap3boilerplateAlert');
+	},
+});
+
+Template.Bootstrap3boilerplate.events({
+	'click button.close': function (e,t) {
+		var alertid = t.$(e.target).attr('alertid');
+		Bootstrap3boilerplate.removeAlert(alertid);
 	}
 });
 //

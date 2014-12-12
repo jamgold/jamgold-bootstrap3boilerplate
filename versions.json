@@ -1,6 +1,14 @@
 {
   "dependencies": [
     [
+      "accounts-base",
+      "1.1.2"
+    ],
+    [
+      "accounts-password",
+      "1.0.4"
+    ],
+    [
       "application-configuration",
       "1.0.3"
     ],
@@ -37,6 +45,10 @@
       "1.0.2"
     ],
     [
+      "classcraft:knox",
+      "0.9.11"
+    ],
+    [
       "ctl",
       "1.0.2"
     ],
@@ -53,7 +65,15 @@
       "1.0.5"
     ],
     [
+      "edgee:slingshot",
+      "0.2.0"
+    ],
+    [
       "ejson",
+      "1.0.4"
+    ],
+    [
+      "email",
       "1.0.4"
     ],
     [
@@ -93,12 +113,44 @@
       "1.0.1"
     ],
     [
+      "iron:controller",
+      "1.0.3"
+    ],
+    [
+      "iron:core",
+      "1.0.3"
+    ],
+    [
+      "iron:dynamic-template",
+      "1.0.3"
+    ],
+    [
+      "iron:layout",
+      "1.0.3"
+    ],
+    [
+      "iron:location",
+      "1.0.3"
+    ],
+    [
+      "iron:middleware-stack",
+      "1.0.3"
+    ],
+    [
+      "iron:router",
+      "1.0.3"
+    ],
+    [
+      "iron:url",
+      "1.0.3"
+    ],
+    [
       "jamgold:bootstrap3boilerplate",
-      "1.0.0"
+      "0.0.1"
     ],
     [
       "jamgold:lorem-ipsum",
-      "1.0.0_2"
+      "0.0.1"
     ],
     [
       "jquery",
@@ -115,6 +167,10 @@
     [
       "livedata",
       "1.0.11"
+    ],
+    [
+      "localstorage",
+      "1.0.1"
     ],
     [
       "logging",
@@ -145,8 +201,16 @@
       "1.0.8"
     ],
     [
+      "mrt:accounts-ui-bootstrap-3",
+      "0.3.3"
+    ],
+    [
       "mrt:bootstrap-3",
       "0.3.8"
+    ],
+    [
+      "npm-bcrypt",
+      "0.7.7"
     ],
     [
       "observe-sequence",
@@ -181,8 +245,16 @@
       "1.0.2"
     ],
     [
+      "service-configuration",
+      "1.0.2"
+    ],
+    [
       "session",
       "1.0.4"
+    ],
+    [
+      "sha",
+      "1.0.1"
     ],
     [
       "spacebars",
@@ -191,6 +263,14 @@
     [
       "spacebars-compiler",
       "1.0.3"
+    ],
+    [
+      "srp",
+      "1.0.1"
+    ],
+    [
+      "stylus",
+      "1.0.5"
     ],
     [
       "templating",
