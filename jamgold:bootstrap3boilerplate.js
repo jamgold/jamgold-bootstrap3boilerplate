@@ -172,7 +172,7 @@ Template._bootstrap3boilerplateNavbar_link.helpers({
 		}
 		else
 		{
-			if(Bootstrap3boilerplate.iron_router)
+			if(Bootstrap3boilerplate._iron_router)
 			{
 				var c = Router.current();
 				if(c)
