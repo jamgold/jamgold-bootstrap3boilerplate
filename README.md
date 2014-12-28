@@ -43,7 +43,7 @@ simple configure Iron Router to use Bootstrap3Boilerplate as the layoutTemplate
 
 <code>
 Router.config({
-    layoutTemplate: 'Bootstrap3Boilerplate'
+    layoutTemplate: 'Bootstrap3boilerplate'
 });
 </code>
 
