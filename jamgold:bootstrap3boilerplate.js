@@ -2,10 +2,11 @@
 // navbar-default navbar-inverse navbar-fixed-top navbar-static-top
 //
 Bootstrap3boilerplate = {
-	ProjectName: new ReactiveVar('Project Name'),
+	ProjectName: new ReactiveVar({text:'Project Name',href:'#'}),
 	fluid: new ReactiveVar(false),
 	notFound: 'Bootstrap3boilerplateNotFound',
 	Navbar: {
+		template: null,
 		type: new ReactiveVar('navbar-default'),
 		inverse: new ReactiveVar(false),
 		left: function() {
@@ -39,11 +40,27 @@ Bootstrap3boilerplate = {
 					var c = t.$(e.target).attr('class').split(/ /)[1].replace(/_/g,'-');
 					Bootstrap3boilerplate.Navbar.type.set(c);
 				},
-				'click .navbar-nav.left a': function(e,t) {
-					Bootstrap3boilerplate.setTemplate(e.target.href)
+				'click .navbar-nav.left a, click a.navbar-brand': function(e,t) {
+					if(e.currentTarget.className != 'dropdown-toggle')
+						Bootstrap3boilerplate.setContent(e.target.href)
 				}
 			});
 		},
+	},
+	Footer: {
+		template: null,
+		show: new ReactiveVar(true),
+		content: new ReactiveVar( Meteor.release )
+	},
+	Modal: {
+		template: null,
+		id: 'Bootstrap3boilerplateModal',
+		title: new ReactiveVar( 'Modal Header' ),
+		body: new ReactiveVar( 'Modal Body' ),
+		show: function(){
+			console.log(this);
+			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
+		}
 	},
 	alert: function(type, text, dismiss) {
 		type = _.indexOf(Bootstrap3boilerplate._alertTypes, type)>=0 ? type : 'info';
@@ -74,13 +91,14 @@ Bootstrap3boilerplate = {
 	//
 	// function used for Template.dynamic
 	//
-	template: function() {
-		var t = Session.get('template');
+	content: function() {
+		var t = Session.get('Bootstrap3boilerplateContent');
 		return Template[t] == undefined ? Bootstrap3boilerplate.notFound : t;
 	},
-	setTemplate: function(linkhash) {
+	setContent: function(linkhash) {
 		var t = linkhash.split('#')[1];
-		if(t) Session.set('template', t);
+		if(t) Session.set('Bootstrap3boilerplateContent', t);
+		else Session.set('Bootstrap3boilerplateContent','hello');
 	},
 	_alertTypes: ['success', 'info', 'warning', 'danger'],
 	_iron_router: false,
@@ -89,7 +107,7 @@ Bootstrap3boilerplate = {
 		Session.setDefault('Bootstrap3boilerplateAlert', []);
 		this._iron_router = Package['iron:router'] !== undefined;
 		if(!this._iron_router)
-			this.setTemplate(document.location.hash);
+			this.setContent(document.location.hash);
 		if(customEvents)
 		{
 			if(typeof customEvents == 'object')
@@ -105,7 +123,26 @@ Bootstrap3boilerplate = {
 			// update body class should Navbar Type change
 			$('body').attr('class', 'body-'+Bootstrap3boilerplate.Navbar.type.get());
 		});
+		// console.info('Bootstrap3boilerplate.init');
 	}
+};
+
+Template.Bootstrap3boilerplateModal.rendered = function () {
+	Bootstrap3boilerplate.Modal.template = this;
+	if(Bootstrap3boilerplate.Modal.rendered !== undefined)
+		Bootstrap3boilerplate.Modal.rendered();
+};
+
+Template.Bootstrap3boilerplateModal.helpers({
+	modal: function() {
+		return Bootstrap3boilerplate.Modal;
+	}
+});
+
+Template.Bootstrap3boilerplateNavbar.rendered = function() {
+	Bootstrap3boilerplate.Navbar.template = this;
+	if(Bootstrap3boilerplate.Navbar.rendered != undefined)
+		Bootstrap3boilerplate.Navbar.rendered();
 };
 
 Template.Bootstrap3boilerplateNavbar.helpers({
@@ -141,12 +178,15 @@ Template.Bootstrap3boilerplate.helpers({
 	iron_router: function() {
 		return Bootstrap3boilerplate._iron_router;
 	},
-	template: function() {
-		return Bootstrap3boilerplate.template();
+	content: function() {
+		return Bootstrap3boilerplate.content();
 	},
 	alert: function() {
 		return Session.get('Bootstrap3boilerplateAlert');
 	},
+	footer: function() {
+		return Bootstrap3boilerplate.Footer;
+	}
 });
 
 Template.Bootstrap3boilerplate.events({
@@ -159,7 +199,10 @@ Template.Bootstrap3boilerplate.events({
 // set the right body class when the Boilerplate gets rendered
 //
 Template.Bootstrap3boilerplate.rendered = function () {
+	Bootstrap3boilerplate.template = this;
 	$('body').attr('class', 'body-'+Bootstrap3boilerplate.Navbar.type.get());
+	if(Bootstrap3boilerplate.rendered !== undefined)
+		Bootstrap3boilerplate.rendered();
 };
 
 Template._bootstrap3boilerplateNavbar_link.helpers({
@@ -174,11 +217,15 @@ Template._bootstrap3boilerplateNavbar_link.helpers({
 		{
 			if(Bootstrap3boilerplate._iron_router)
 			{
-				var c = Router.current();
-				if(c)
-					r = c.route.path() == href ? 'active' : ' ';
-				else
-					r = href == '/' ? 'active' : ' ';
+				try {
+					var c = Router.current();
+					if(c)
+						r = c.location.get().path == href ? 'active' : ' ';
+					else
+						r = href == '/' ? 'active' : ' ';
+				} catch(e) {
+					console.log(e);
+				}
 			}
 			else
 			{

@@ -16,7 +16,7 @@ and your preferred bootstrap3 package, eg.
 
 ### No Iron Router
 
-If Iron:Router is not used, the system defaults to Template.dynamic via the Session variable _template_.
+If Iron:Router is not used, the system defaults to Template.dynamic via the Session variable _Bootstrap3boilerplateContent_.
 
 Include the Bootstrap3boilerplate template in your body tag
 
@@ -26,7 +26,7 @@ Include the Bootstrap3boilerplate template in your body tag
     </body>
 </code>
 
-and initialize the setup
+and initialize the setup. Without Iron Router the hash is being used to set the template to use as content. Manually this can be achieved with Bootstrap3boilerplate.setContent('#something') which will then try to load template 'something'
 
 <code>
 if(Meteor.isClient)
@@ -42,8 +42,8 @@ The package exports the Object Bootstrap3boilerplate that allows to configure th
 simple configure Iron Router to use Bootstrap3Boilerplate as the layoutTemplate
 
 <code>
-Router.config({
-    layoutTemplate: 'Bootstrap3Boilerplate'
+Router.configure({
+    layoutTemplate: 'Bootstrap3boilerplate'
 });
 </code>
 
@@ -59,6 +59,9 @@ The following reactive vars can be set
 
 and one static string defining the Not Found template
 - <code>Bootstrap3boilerplate.notFound = 'Template'</code> set the notFound template, default Bootstrap3boilerplateNotFound
+
+- <code>Bootstrap3boilerplate.Footer.show.set(boolean)</code> show the footer (default true)
+- <code>Bootstrap3boilerplate.Footer.content.set(text)</code> the text in the footer (default Meteor.release)
 
 The following are methods that can be overridden
 - <code>Bootstrap3boilerplate.Navbar.left = function()</code> return array of menu objects

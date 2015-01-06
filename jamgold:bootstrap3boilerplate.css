@@ -1,3 +1,19 @@
 body.body-navbar-fixed-top {
 	padding-top: 70px;
 }
+footer {
+	position: absolute;
+	bottom: 0;
+	height: 3em;
+	width: 95%;
+	margin:0 auto;
+	clear:both;
+	padding: 0 15px;
+}
+footer .container {
+	margin: 0 auto;
+	padding-top: 1em;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	height: 100%;
+}
