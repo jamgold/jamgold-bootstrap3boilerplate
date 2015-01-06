@@ -1,7 +1,7 @@
 Package.describe({
   name: 'jamgold:bootstrap3boilerplate',
   summary: 'Provide basic bootstrap-3 template with alert & modal & navbar & footer',
-  version: '0.0.3',
+  version: '0.0.3_1',
   git: 'https://github.com/jamgold/jamgold-bootstrap3boilerplate'
 });
 
