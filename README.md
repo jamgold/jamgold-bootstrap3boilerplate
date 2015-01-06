@@ -42,7 +42,11 @@ The package exports the Object Bootstrap3boilerplate that allows to configure th
 simple configure Iron Router to use Bootstrap3Boilerplate as the layoutTemplate
 
 <code>
+<<<<<<< HEAD
 Router.configure({
+=======
+Router.config({
+>>>>>>> FETCH_HEAD
     layoutTemplate: 'Bootstrap3boilerplate'
 });
 </code>
