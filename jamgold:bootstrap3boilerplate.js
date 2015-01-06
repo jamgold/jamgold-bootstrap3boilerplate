@@ -58,7 +58,6 @@ Bootstrap3boilerplate = {
 		title: new ReactiveVar( 'Modal Header' ),
 		body: new ReactiveVar( 'Modal Body' ),
 		show: function(){
-			console.log(this);
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
 		}
 	},
