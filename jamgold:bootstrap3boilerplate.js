@@ -99,6 +99,10 @@ Bootstrap3boilerplate = {
 		if(t) Session.set('Bootstrap3boilerplateContent', t);
 		else Session.set('Bootstrap3boilerplateContent','hello');
 	},
+	setTemplate: function(linkhash) {
+		console.error('Bootstrap3boilerplate.setTemplate is depcrecated, please use setContent instead');
+		this.setContent(linkhash);
+	},
 	_alertTypes: ['success', 'info', 'warning', 'danger'],
 	_iron_router: false,
 	// have an init function to setup a Tracker for the body class
@@ -248,3 +252,15 @@ Template.Bootstrap3boilerplateNotFound.helpers({
 	}
 });
 
+Template.Bootstrap3boilerplateDevelopment.helpers({
+	isDevelopment: function () {
+		return Meteor.isDevelopment;
+	}
+});
+// Meteor.startup(function(){
+// 	if(Meteor.isDevelopment) 
+// 	{
+// 		$('body').addClass('development');
+// 		console.log('site is development')
+// 	}
+// });

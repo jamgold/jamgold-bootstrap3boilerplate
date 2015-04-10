@@ -61,6 +61,7 @@
 </template>
 
 <template name="Bootstrap3boilerplate">
+	{{>Bootstrap3boilerplateDevelopment}}
 	{{>Bootstrap3boilerplateNavbar}}
 
 	<div class="{{fluid}}">
@@ -122,4 +123,10 @@
 	<div class="jumbotron">
 	<h2>The requested page <strong>{{notFound}}</strong> does not exist</h2>
 	</div>
+</template>
+
+<template name="Bootstrap3boilerplateDevelopment">
+	{{#if isDevelopment}}
+	<img class="development" src="/packages/jamgold:bootstrap3boilerplate/public/development.png">
+	{{/if}}
 </template>
