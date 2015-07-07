@@ -57,6 +57,7 @@ Bootstrap3boilerplate = {
 		id: 'Bootstrap3boilerplateModal',
 		title: new ReactiveVar( 'Modal Header' ),
 		body: new ReactiveVar( 'Modal Body' ),
+		dynamicTemplate: new ReactiveVar(),
 		show: function(){
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
 		}
@@ -257,10 +258,3 @@ Template.Bootstrap3boilerplateDevelopment.helpers({
 		return Meteor.isDevelopment;
 	}
 });
-// Meteor.startup(function(){
-// 	if(Meteor.isDevelopment) 
-// 	{
-// 		$('body').addClass('development');
-// 		console.log('site is development')
-// 	}
-// });

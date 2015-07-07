@@ -108,7 +108,11 @@
           <h4 class="modal-title">{{modal.title.get}}</h4>
         </div>
         <div class="modal-body">
-          {{{modal.body.get}}}
+		{{#if modal.dynamicTemplate.get}}
+			{{> Template.dynamic template=modal.dynamicTemplate.get}}
+		{{else}}
+			{{{modal.body.get}}}
+		{{/if}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
