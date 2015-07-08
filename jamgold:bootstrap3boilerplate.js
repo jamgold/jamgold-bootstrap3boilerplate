@@ -130,11 +130,11 @@ Bootstrap3boilerplate = {
 	}
 };
 
-Template.Bootstrap3boilerplateModal.rendered = function () {
+Template.Bootstrap3boilerplateModal.onRendered( function () {
 	Bootstrap3boilerplate.Modal.template = this;
 	if(Bootstrap3boilerplate.Modal.rendered !== undefined)
 		Bootstrap3boilerplate.Modal.rendered();
-};
+});
 
 Template.Bootstrap3boilerplateModal.helpers({
 	modal: function() {
@@ -142,11 +142,11 @@ Template.Bootstrap3boilerplateModal.helpers({
 	}
 });
 
-Template.Bootstrap3boilerplateNavbar.rendered = function() {
+Template.Bootstrap3boilerplateNavbar.onRendered( function() {
 	Bootstrap3boilerplate.Navbar.template = this;
 	if(Bootstrap3boilerplate.Navbar.rendered != undefined)
 		Bootstrap3boilerplate.Navbar.rendered();
-};
+});
 
 Template.Bootstrap3boilerplateNavbar.helpers({
 	// return type of navbar
@@ -201,12 +201,12 @@ Template.Bootstrap3boilerplate.events({
 //
 // set the right body class when the Boilerplate gets rendered
 //
-Template.Bootstrap3boilerplate.rendered = function () {
+Template.Bootstrap3boilerplate.onRendered( function () {
 	Bootstrap3boilerplate.template = this;
 	$('body').attr('class', 'body-'+Bootstrap3boilerplate.Navbar.type.get());
 	if(Bootstrap3boilerplate.rendered !== undefined)
 		Bootstrap3boilerplate.rendered();
-};
+});
 
 Template._bootstrap3boilerplateNavbar_link.helpers({
 	activeLink: function (href) {

@@ -62,10 +62,13 @@
 
 <template name="Bootstrap3boilerplate">
 	{{>Bootstrap3boilerplateDevelopment}}
+	{{#if iron_router}}
+	{{>yield region="modal"}}
+	{{/if}}
+	{{>Bootstrap3boilerplateModal}}
 	{{>Bootstrap3boilerplateNavbar}}
 
 	<div class="{{fluid}}">
-		{{>Bootstrap3boilerplateModal}}
 
 		{{#if alert}}
 			{{#each alert}}
