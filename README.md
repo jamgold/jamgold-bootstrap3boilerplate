@@ -41,7 +41,7 @@ The package exports the Object Bootstrap3boilerplate that allows to configure th
 
 simple configure Iron Router to use Bootstrap3Boilerplate as the layoutTemplate
 
-<code>
+```
 Router.configure({
     layoutTemplate: 'Bootstrap3boilerplate'
 });
@@ -49,7 +49,7 @@ if(Meteor.isClient)
 {
     Bootstrap3boilerplate.init();
 }
-</code>
+```
 
 ## Configuration
 
