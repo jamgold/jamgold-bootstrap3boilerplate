@@ -58,6 +58,7 @@ Bootstrap3boilerplate = {
 		title: new ReactiveVar( 'Modal Header' ),
 		body: new ReactiveVar( 'Modal Body' ),
 		dynamicTemplate: new ReactiveVar(),
+		formId: new ReactiveVar(),
 		show: function(){
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
 		}
@@ -142,6 +143,12 @@ Template.Bootstrap3boilerplateModal.helpers({
 		return Bootstrap3boilerplate.Modal;
 	}
 });
+Template.Bootstrap3boilerplateModal.events({
+	"click button.btn-primary": function() {
+		$('#' + Bootstrap3boilerplate.Modal.formId.get()).submit();
+	}
+});
+
 
 Template.Bootstrap3boilerplateNavbar.rendered = function() {
 	Bootstrap3boilerplate.Navbar.template = this;
