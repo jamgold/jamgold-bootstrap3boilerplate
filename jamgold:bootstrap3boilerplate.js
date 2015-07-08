@@ -57,10 +57,15 @@ Bootstrap3boilerplate = {
 		id: 'Bootstrap3boilerplateModal',
 		title: new ReactiveVar( 'Modal Header' ),
 		body: new ReactiveVar( 'Modal Body' ),
+		effect: new ReactiveVar( 'fade' ),
 		dynamicTemplate: new ReactiveVar(),
 		formId: new ReactiveVar(),
 		show: function(){
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
+
+		},
+		hide: function(){
+			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal('hide');
 		}
 	},
 	alert: function(type, text, dismiss) {
