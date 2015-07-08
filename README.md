@@ -45,7 +45,6 @@ simple configure Iron Router to use Bootstrap3Boilerplate as the layoutTemplate
 Router.configure({
     layoutTemplate: 'Bootstrap3boilerplate'
 });
-
 if(Meteor.isClient)
 {
     Bootstrap3boilerplate.init();
