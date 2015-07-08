@@ -57,8 +57,15 @@ Bootstrap3boilerplate = {
 		id: 'Bootstrap3boilerplateModal',
 		title: new ReactiveVar( 'Modal Header' ),
 		body: new ReactiveVar( 'Modal Body' ),
+		effect: new ReactiveVar( 'fade' ),
+		dynamicTemplate: new ReactiveVar(),
+		formId: new ReactiveVar(),
 		show: function(){
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
+
+		},
+		hide: function(){
+			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal('hide');
 		}
 	},
 	alert: function(type, text, dismiss) {
@@ -141,6 +148,12 @@ Template.Bootstrap3boilerplateModal.helpers({
 		return Bootstrap3boilerplate.Modal;
 	}
 });
+Template.Bootstrap3boilerplateModal.events({
+	"click button.btn-primary": function() {
+		$('#' + Bootstrap3boilerplate.Modal.formId.get()).submit();
+	}
+});
+
 
 Template.Bootstrap3boilerplateNavbar.onRendered( function() {
 	Bootstrap3boilerplate.Navbar.template = this;
@@ -257,10 +270,3 @@ Template.Bootstrap3boilerplateDevelopment.helpers({
 		return Meteor.isDevelopment;
 	}
 });
-// Meteor.startup(function(){
-// 	if(Meteor.isDevelopment) 
-// 	{
-// 		$('body').addClass('development');
-// 		console.log('site is development')
-// 	}
-// });
