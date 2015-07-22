@@ -63,7 +63,7 @@
 <template name="Bootstrap3boilerplate">
 	{{>Bootstrap3boilerplateDevelopment}}
 	{{#if iron_router}}
-	{{>yield region="modal"}}
+		{{>yield region="modal"}}
 	{{/if}}
 	{{>Bootstrap3boilerplateModal}}
 	{{>Bootstrap3boilerplateNavbar}}
@@ -104,27 +104,27 @@
   <!-- <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Launch demo modal</a> -->
   <!-- Modal -->
   <div class="modal {{modal.effect.get}}" id="{{modal.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">{{modal.title.get}}</h4>
-        </div>
-        <div class="modal-body">
+	<div class="modal-dialog {{#if modal.large.get}}modal-lg{{/if}}">
+	  <div class="modal-content ">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title">{{modal.title.get}}</h4>
+		</div>
+		<div class="modal-body">
 		{{#if modal.dynamicTemplate.get}}
 			{{> Template.dynamic template=modal.dynamicTemplate.get}}
 		{{else}}
 			{{{modal.body.get}}}
 		{{/if}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		{{#if modal.formId.get}}
-          <button type="button" class="btn btn-primary">Save changes</button>
+		  <button type="button" class="save btn {{modal.save.classes}}">{{modal.save.text}}</button>
 		{{/if}}
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+		</div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 </template>
 

@@ -96,3 +96,16 @@ Lastly a couple of remaining methods of the Bootstrap-3 Boilerplate
     {href:"#sep2", text: 'One more separated link'}
 ]}
 </pre>
+
+### Modals
+
+The boilerplate has support for Bootstrap Modals built-in. <code>Bootstrap3boilerplate.Modal.show()</code> and <code>Bootstrap3boilerplate.Modal.hide()</code> control the display of the Modal. You can determine what to show in the modal with <code>Bootstrap3boilerplate.Modal.title.set(text)</code> and <code>Bootstrap3boilerplate.Modal.body.set(text)</code>. Instead of setting the body text of the Modal, you can dynamically load a template instead by defining <code>Bootstrap3boilerplate.Modal.dynamicTemplate.set(templateName)</code>. Other variables for the Modal are
+
+- <code>Bootstrap3boilerplate.Modal.large.set(boolean)</code> determine whether to render modal with modal-lg (default false)
+- <code>Bootstrap3boilerplate.Modal.effect.set(effect)</code> set the Modal transition (default fade)
+- <code>Bootstrap3boilerplate.Modal.formId.set(string)</code> determins if a save button will be shown
+- <code>Bootstrap3boilerplate.Modal.save Object</code> this object contains three values
+    -- classes: defines the CSS classes for the save button
+    -- text: the text of the Save button
+    -- action: a function that will be called when the save button is clicked
+

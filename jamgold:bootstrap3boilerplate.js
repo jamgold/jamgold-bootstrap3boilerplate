@@ -57,15 +57,20 @@ Bootstrap3boilerplate = {
 		id: 'Bootstrap3boilerplateModal',
 		title: new ReactiveVar( 'Modal Header' ),
 		body: new ReactiveVar( 'Modal Body' ),
+		large: new ReactiveVar(false),
 		effect: new ReactiveVar( 'fade' ),
 		dynamicTemplate: new ReactiveVar(),
 		formId: new ReactiveVar(),
 		show: function(){
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal();
-
 		},
 		hide: function(){
 			Bootstrap3boilerplate.Modal.template.$('#'+this.id).modal('hide');
+		},
+		save: {
+			classes: 'btn-default',
+			text: 'Save Changes',
+			action: null
 		}
 	},
 	alert: function(type, text, dismiss) {
@@ -149,8 +154,14 @@ Template.Bootstrap3boilerplateModal.helpers({
 	}
 });
 Template.Bootstrap3boilerplateModal.events({
-	"click button.btn-primary": function() {
-		$('#' + Bootstrap3boilerplate.Modal.formId.get()).submit();
+	"click button.save": function(e,t) {
+		// $('#' + Bootstrap3boilerplate.Modal.formId.get()).submit();
+		console.log(e.target);
+		if(Bootstrap3boilerplate.Modal.save.action)
+		{
+			console.log('triggering save action');
+			Bootstrap3boilerplate.Modal.save.action();
+		}
 	}
 });
 
