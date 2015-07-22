@@ -256,7 +256,7 @@ Template._bootstrap3boilerplateNavbar_link.helpers({
 			}
 			else
 			{
-				var t = Session.get('template');
+				var t = Session.get('Bootstrap3boilerplateContent');
 				r = href == document.location.hash ? 'active' : ' ';
 			}
 		}
