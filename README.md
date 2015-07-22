@@ -105,7 +105,7 @@ The boilerplate has support for Bootstrap Modals built-in. <code>Bootstrap3boile
 - <code>Bootstrap3boilerplate.Modal.effect.set(effect)</code> set the Modal transition (default fade)
 - <code>Bootstrap3boilerplate.Modal.formId.set(string)</code> determins if a save button will be shown
 - <code>Bootstrap3boilerplate.Modal.save Object</code> this object contains three values
-    -- classes: defines the CSS classes for the save button
-    -- text: the text of the Save button
-    -- action: a function that will be called when the save button is clicked
+    - classes: defines the CSS classes for the save button
+    - text: the text of the Save button
+    - action: a function that will be called when the save button is clicked
 
