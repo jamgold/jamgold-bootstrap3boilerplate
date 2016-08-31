@@ -10,5 +10,6 @@ Package.onUse(function(api) {
   api.use(['reactive-var','jamgold:isdevelopment@0.0.1']);
   api.use(['templating','handlebars'], 'client');
   api.export('Bootstrap3boilerplate');
-  api.addFiles(['jamgold:bootstrap3boilerplate.html','jamgold:bootstrap3boilerplate.js','jamgold:bootstrap3boilerplate.css','public/development.png'],'client');
+  api.addAssets('public/development.png','client');
+  api.addFiles(['jamgold:bootstrap3boilerplate.html','jamgold:bootstrap3boilerplate.js','jamgold:bootstrap3boilerplate.css'],'client');
 });

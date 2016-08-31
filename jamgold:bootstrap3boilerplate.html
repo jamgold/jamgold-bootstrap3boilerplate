@@ -60,18 +60,14 @@
 	{{/if}}
 </template>
 
-<template name="Bootstrap3boilerplate">
+<template name="Bootstrap3boilerplateFlowRouter">
 	{{>Bootstrap3boilerplateDevelopment}}
-	{{#if iron_router}}
-		{{>yield region="modal"}}
-	{{/if}}
 	{{>Bootstrap3boilerplateModal}}
 	{{>Bootstrap3boilerplateNavbar}}
 
-	<div class="{{fluid}}">
-
-		{{#if alert}}
-			{{#each alert}}
+	<div class="{{Bootstrap3boilerplate.fluid}}">
+		{{#if Bootstrap3boilerplate.alert}}
+			{{#each Bootstrap3boilerplate.alert}}
 			<div class="alert alert-{{type}}" role="alert">
 			{{#if dismiss}}
 			<button alertid="{{alertid}}" type="button" class="close" xdata-dismiss="alert">
@@ -85,17 +81,82 @@
 		{{/if}}
 
 		<div class="starter-template">
-		{{#if iron_router}}
+			{{>Template.dynamic template=content}}
+		</div>
+	</div><!-- /.container -->
+
+	{{#if Bootstrap3boilerplate.footer.show.get}}
+	<footer class="footer">
+		<div class="container"><p class="text-muted">{{Bootstrap3boilerplate.footer.content.get}}</p></div>
+	</footer>
+	{{/if}}
+</template>
+
+<template name="Bootstrap3boilerplateIronRouter">
+	{{>Bootstrap3boilerplateDevelopment}}
+	{{>yield region="modal"}}
+	{{>Bootstrap3boilerplateModal}}
+	{{>Bootstrap3boilerplateNavbar}}
+
+	<div class="{{Bootstrap3boilerplate.fluid}}">
+		{{#if Bootstrap3boilerplate.alert}}
+			{{#each Bootstrap3boilerplate.alert}}
+			<div class="alert alert-{{type}}" role="alert">
+			{{#if dismiss}}
+			<button alertid="{{alertid}}" type="button" class="close" xdata-dismiss="alert">
+				<span alertid="{{alertid}}" aria-hidden="true">&times;</span>
+				<span alertid="{{alertid}}" class="sr-only">Close</span>
+			</button>
+			{{/if}}
+			{{{text}}}
+			</div>
+			{{/each}}
+		{{/if}}
+
+		<div class="starter-template">
+			{{>yield}}
+		</div>
+	</div><!-- /.container -->
+
+	{{#if Bootstrap3boilerplate.footer.show.get}}
+	<footer class="footer">
+		<div class="container"><p class="text-muted">{{Bootstrap3boilerplate.footer.content.get}}</p></div>
+	</footer>
+	{{/if}}
+</template>
+
+<template name="Bootstrap3boilerplate">
+	{{>Bootstrap3boilerplateDevelopment}}
+	{{>Bootstrap3boilerplateModal}}
+	{{>Bootstrap3boilerplateNavbar}}
+
+	<div class="{{Bootstrap3boilerplate.fluid}}">
+		{{#if Bootstrap3boilerplate.alert}}
+			{{#each Bootstrap3boilerplate.alert}}
+			<div class="alert alert-{{type}}" role="alert">
+			{{#if dismiss}}
+			<button alertid="{{alertid}}" type="button" class="close" xdata-dismiss="alert">
+				<span alertid="{{alertid}}" aria-hidden="true">&times;</span>
+				<span alertid="{{alertid}}" class="sr-only">Close</span>
+			</button>
+			{{/if}}
+			{{{text}}}
+			</div>
+			{{/each}}
+		{{/if}}
+
+		<div class="starter-template">
+		{{#if Bootstrap3boilerplate.iron_router}}
 			{{>yield}}
 		{{else}}
-			{{>Template.dynamic template=content}}
+			{{>Template.dynamic template=Bootstrap3boilerplate.content}}
 		{{/if}}
 		</div>
 	</div><!-- /.container -->
 
-	{{#if footer.show.get}}
+	{{#if Bootstrap3boilerplate.footer.show.get}}
 	<footer class="footer">
-		<div class="container"><p class="text-muted">{{footer.content.get}}</p></div>
+		<div class="container"><p class="text-muted">{{Bootstrap3boilerplate.footer.content.get}}</p></div>
 	</footer>
 	{{/if}}
 </template>
