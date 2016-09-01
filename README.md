@@ -51,6 +51,20 @@ if(Meteor.isClient)
 }
 ```
 
+### With Flow Router
+
+```
+FlowRouter.route('/', {
+  name: 'route_name',
+  action: function(params) {
+    BlazeLayout.render(Bootstrap3boilerplate.layout, {
+      // specify the name of the template to be rendered
+      content: "template"
+    });
+  }
+});
+```
+
 ## Configuration
 
 The package exports a global object called <code>Bootstrap3boilerplate</code> which is being used to control the different aspects of the template.
