@@ -6,6 +6,7 @@ Bootstrap3boilerplate = {
 	fluid: new ReactiveVar(false),
 	notFound: 'Bootstrap3boilerplateNotFound',
 	__content: new ReactiveVar('hello'),
+	__alert: new ReactiveVar([]),
 	layout: 'Bootstrap3boilerplate',
 	Navbar: {
 		template: null,
@@ -82,30 +83,32 @@ Bootstrap3boilerplate = {
 		}
 	},
 	alert: function(type, text, dismiss) {
+		var alertid = Meteor.uuid();
 		type = _.indexOf(Bootstrap3boilerplate._alertTypes, type)>=0 ? type : 'info';
 		dismiss = dismiss === undefined ? false : dismiss === true;
-		var alerts = Session.get('Bootstrap3boilerplateAlert');
+		var alerts = Bootstrap3boilerplate.__alert.get();
 		if(alerts === undefined) alerts = [];
 		alerts.push({
 			type: type,
 			text: text,
 			dismiss: dismiss,
-			alertid: Meteor.uuid()
+			alertid: alertid
 		});
-		Session.set('Bootstrap3boilerplateAlert',alerts);
+		Bootstrap3boilerplate.__alert.set(alerts);
+		return alertid;
 	},
 	removeAlert: function(alertid) {
 		var newalerts = [];
 		if(_.indexOf(['all','clear'],alertid) <0)
 		{
-			var alerts = Session.get('Bootstrap3boilerplateAlert');
+			var alerts = Bootstrap3boilerplate.__alert.get();
 			if(alerts === undefined) alerts = [];
 			_.each(alerts,function(alert){
 				if(alert.alertid != alertid)
 					newalerts.push(alert);
 			});
 		}
-		Session.set('Bootstrap3boilerplateAlert',newalerts);
+		Bootstrap3boilerplate.__alert.set(newalerts);
 	},
 	//
 	// function used for Template.dynamic
@@ -127,7 +130,6 @@ Bootstrap3boilerplate = {
 	__router: false,
 	// have an init function to setup a Tracker for the body class
 	init: function(customEvents){
-		Session.setDefault('Bootstrap3boilerplateAlert', []);
 		if(Package['iron:router'] !== undefined) {
 			this.__router = 'iron:router';
 			this.layout = 'Bootstrap3boilerplateIronRouter';
@@ -233,7 +235,7 @@ Template.registerHelper('Bootstrap3boilerplate', function(){
 			return Bootstrap3boilerplate.content();
 		},
 		alert: function() {
-			return Session.get('Bootstrap3boilerplateAlert');
+			return Bootstrap3boilerplate.__alert.get();
 		},
 		footer: function() {
 			return Bootstrap3boilerplate.Footer;
@@ -309,7 +311,7 @@ Template._bootstrap3boilerplateNavbar_link.helpers({
 
 Template.Bootstrap3boilerplateNotFound.helpers({
 	notFound: function () {
-		var t = Session.get('template');
+		var t = Bootstrap3boilerplate.__content.get();
 		return document.location.hash;
 	}
 });
