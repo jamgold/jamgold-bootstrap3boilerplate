@@ -53,7 +53,10 @@ Bootstrap3boilerplate = {
 	Footer: {
 		template: null,
 		show: new ReactiveVar(true),
-		content: new ReactiveVar( Meteor.release )
+		content: new ReactiveVar( Meteor.release ),
+		classes(){
+			return this.show.get() ? 'footer-shown':''
+		}
 	},
 	Modal: {
 		template: null,
@@ -149,9 +152,27 @@ Bootstrap3boilerplate = {
 			};
 			Template.Bootstrap3boilerplateFlowRouter.events( Bootstrap3boilerplate.__events);
 		}
+		if(Package['ostrio:flow-router-extra'] !== undefined) {
+			var self = this;
+			self.__router = 'ostrio:flow-router-extra';
+			self.layout = 'Bootstrap3boilerplateFlowRouter';
+			import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+			window.FlowRouter = FlowRouter;
+			FlowRouter.route('*', {
+			  title: '404: Page not found',
+			  action(params, queryParams) {
+			    // require('../../ui/pages/not-found/not-found.js');
+			    console.log(Meteor.isServer, params[0], queryParams);
+			    this.render(self.layout, "Bootstrap3boilerplateNotFound", {content:"Bootstrap3boilerplateNotFound"});
+			  },  
+			});
+			Template.Bootstrap3boilerplateFlowRouter.events( Bootstrap3boilerplate.__events);
+		}
 
 		if(!this.__router)
+		{
 			this.setContent(document.location.hash);
+		}
 		if(customEvents)
 		{
 			if(typeof customEvents == 'object')
@@ -239,6 +260,9 @@ Template.registerHelper('Bootstrap3boilerplate', function(){
 		},
 		footer: function() {
 			return Bootstrap3boilerplate.Footer;
+		},
+		iron_router() {
+			return Bootstrap3boilerplate.__router == 'iron:router';
 		}
 	};
 });
@@ -281,6 +305,7 @@ Template._bootstrap3boilerplateNavbar_link.helpers({
 				break;
 
 				case 'kadira:flow-router':
+				case 'ostrio:flow-router-extra':
 					try {
 						FlowRouter.watchPathChange();
 
@@ -311,8 +336,30 @@ Template._bootstrap3boilerplateNavbar_link.helpers({
 
 Template.Bootstrap3boilerplateNotFound.helpers({
 	notFound: function () {
-		var t = Bootstrap3boilerplate.__content.get();
-		return document.location.hash;
+		var p = 'undefined';
+		switch(Bootstrap3boilerplate.__router) {
+			case 'iron:router':
+				var c = Router.current();
+				if(c)
+					p = c.location.get().path;
+				break;
+
+			case 'kadira:flow-router':
+			case 'ostrio:flow-router-extra':
+				try {
+					FlowRouter.watchPathChange();
+
+					var c = FlowRouter.current();
+					if(c)
+						p = c.path;
+				} catch(e) {
+					console.log(e);
+				}
+				break;
+
+			default: p = document.location.hash;
+		}
+		return p;
 	}
 });
 

@@ -23,3 +23,7 @@ img.development {
 	top: 0;
 	left: 0;
 }
+
+div.starter-template.footer-shown {
+	margin: 0 0 50px 0;
+}
