@@ -86,7 +86,7 @@ Bootstrap3boilerplate = {
 		}
 	},
 	alert: function(type, text, dismiss) {
-		var alertid = Meteor.uuid();
+		var alertid = Random.id();
 		type = _.indexOf(Bootstrap3boilerplate._alertTypes, type)>=0 ? type : 'info';
 		dismiss = dismiss === undefined ? false : dismiss === true;
 		var alerts = Bootstrap3boilerplate.__alert.get();

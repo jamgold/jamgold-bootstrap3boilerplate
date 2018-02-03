@@ -7,7 +7,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
-  api.use(['reactive-var','jamgold:isdevelopment@0.0.1','ecmascript@0.9.0']);
+  api.use(['reactive-var','jamgold:isdevelopment@0.0.1','ecmascript@0.10.0','random']);
   api.use(['templating','handlebars'], 'client');
   api.export('Bootstrap3boilerplate');
   api.addAssets('public/development.png','client');
