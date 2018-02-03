@@ -1,7 +1,7 @@
 Package.describe({
   name: 'jamgold:bootstrap3boilerplate',
   summary: 'Provide basic bootstrap-3 template with alert & modal & navbar & footer',
-  version: '0.0.4_6',
+  version: '0.0.4_7',
   git: 'https://github.com/jamgold/jamgold-bootstrap3boilerplate'
 });
 
@@ -11,5 +11,5 @@ Package.onUse(function(api) {
   api.use(['templating','handlebars'], 'client');
   api.export('Bootstrap3boilerplate');
   api.addAssets('public/development.png','client');
-  api.addFiles(['jamgold:bootstrap3boilerplate.html','jamgold:bootstrap3boilerplate.js','jamgold:bootstrap3boilerplate.css'],'client');
+  api.addFiles(['bootstrap3boilerplate.html','bootstrap3boilerplate.js','bootstrap3boilerplate.css'],'client');
 });

@@ -4,10 +4,10 @@
 Bootstrap3boilerplate = {
 	ProjectName: new ReactiveVar({text:'Project Name',href:'#'}),
 	fluid: new ReactiveVar(false),
-	notFound: 'Bootstrap3boilerplateNotFound',
+	notFound: undefined,
 	__content: new ReactiveVar('hello'),
 	__alert: new ReactiveVar([]),
-	layout: 'Bootstrap3boilerplate',
+	layout: 'Bootstrap3boilerplatePlain',
 	Navbar: {
 		template: null,
 		type: new ReactiveVar('navbar-default'),
@@ -133,9 +133,14 @@ Bootstrap3boilerplate = {
 	__router: false,
 	// have an init function to setup a Tracker for the body class
 	init: function(customEvents){
+		if(this.notFound === undefined) this.notFound = 'Bootstrap3boilerplateNotFound';
 		if(Package['iron:router'] !== undefined) {
 			this.__router = 'iron:router';
 			this.layout = 'Bootstrap3boilerplateIronRouter';
+			Router.configure({
+			  layoutTemplate: 'Bootstrap3boilerplate',
+			});
+			Router.plugin('dataNotFound', {notFoundTemplate: this.notFound});
 			Template.Bootstrap3boilerplateIronRouter.events( Bootstrap3boilerplate.__events);
 		}
 		if(Package['kadira:flow-router'] !== undefined) {
@@ -161,9 +166,11 @@ Bootstrap3boilerplate = {
 			FlowRouter.route('*', {
 			  title: '404: Page not found',
 			  action(params, queryParams) {
-			    // require('../../ui/pages/not-found/not-found.js');
-			    console.log(Meteor.isServer, params[0], queryParams);
-			    this.render(self.layout, "Bootstrap3boilerplateNotFound", {content:"Bootstrap3boilerplateNotFound"});
+			    // console.log(Meteor.isServer, params[0], queryParams);
+			    this.render(self.layout, self.notFound, {
+			    	queryParams: queryParams,
+			    	url: params[0],
+			    });
 			  },  
 			});
 			Template.Bootstrap3boilerplateFlowRouter.events( Bootstrap3boilerplate.__events);
@@ -220,9 +227,9 @@ Template.Bootstrap3boilerplateNavbar.onRendered( function() {
 });
 Template.Bootstrap3boilerplateNavbar.helpers({
 	// return type of navbar
-	layout: function() {
-		return Bootstrap3boilerplate.layout;
-	},
+	// layout: function() {
+	// 	return Bootstrap3boilerplate.layout;
+	// },
 	type: function () {
 		var t = Bootstrap3boilerplate.Navbar.type.get();
 		return t == 'navbar-default' ? t : 'navbar-default '+t;
@@ -263,23 +270,23 @@ Template.registerHelper('Bootstrap3boilerplate', function(){
 		},
 		iron_router() {
 			return Bootstrap3boilerplate.__router == 'iron:router';
-		}
+		},
+		layout: function() {
+			return Bootstrap3boilerplate.layout;
+		},
 	};
 });
-
-Template.Bootstrap3boilerplate.events( Bootstrap3boilerplate.__events);
-//
-// set the right body class when the Boilerplate gets rendered
-//
-Template.Bootstrap3boilerplate.onRendered( function () {
-	Bootstrap3boilerplate._template = this;
-	$('body').attr('class', 'body-'+Bootstrap3boilerplate.Navbar.type.get());
+Template.Bootstrap3boilerplate.onRendered(function(){
+	Bootstrap3boilerplate.template = this;
+	// console.log(`${this.view.name}.onRendered`);
 	if(Bootstrap3boilerplate.rendered !== undefined)
-	{
 		Bootstrap3boilerplate.rendered();
-	}
 });
+Template.Bootstrap3boilerplate.events( Bootstrap3boilerplate.__events);
 
+// Template._bootstrap3boilerplateNavbar_link.onRendered(function(){
+// 	console.log(`${this.view.name}.onRendered`,this.data);
+// });
 Template._bootstrap3boilerplateNavbar_link.helpers({
 	activeLink: function (href) {
 		var linkobject = this;

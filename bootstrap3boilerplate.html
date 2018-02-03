@@ -81,7 +81,7 @@
 		{{/if}}
 
 		<div class="starter-template {{Bootstrap3boilerplate.footer.classes}}">
-			{{>Template.dynamic template=content}}
+			{{>yield}}
 		</div>
 	</div><!-- /.container -->
 
@@ -124,7 +124,7 @@
 	{{/if}}
 </template>
 
-<template name="Bootstrap3boilerplate">
+<template name="Bootstrap3boilerplatePlain">
 	{{>Bootstrap3boilerplateDevelopment}}
 	{{>Bootstrap3boilerplateModal}}
 	{{>Bootstrap3boilerplateNavbar}}
@@ -145,11 +145,7 @@
 		{{/if}}
 
 		<div class="starter-template">
-		{{#if Bootstrap3boilerplate.iron_router}}
-			{{>yield}}
-		{{else}}
 			{{>Template.dynamic template=Bootstrap3boilerplate.content}}
-		{{/if}}
 		</div>
 	</div><!-- /.container -->
 
@@ -158,6 +154,10 @@
 		<div class="container"><p class="text-muted">{{Bootstrap3boilerplate.footer.content.get}}</p></div>
 	</footer>
 	{{/if}}
+</template>
+
+<template name="Bootstrap3boilerplate">
+	{{>Template.dynamic template=Bootstrap3boilerplate.layout data=this}}
 </template>
 
 <template name="Bootstrap3boilerplateModal">
